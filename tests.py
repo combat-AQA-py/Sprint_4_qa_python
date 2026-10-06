@@ -119,8 +119,17 @@ class TestBooksCollector:
         collector.add_book_in_favorites(name)
         collector.add_book_in_favorites(name)  # повторный вызов
         assert collector.get_list_of_favorites_books() == [name]
-        
+
 # --- для метода delete_book_from_favorites ---
+
+    # 10.2. Удаление из избранного: успешное удаление
+    def test_delete_book_from_favorites_removes_existing_book(self):
+        collector = BooksCollector()
+        name = "Любимая"
+        collector.add_new_book(name)
+        collector.add_book_in_favorites(name)
+        collector.delete_book_from_favorites(name)
+        assert collector.get_list_of_favorites_books() == []
 
     # 11. Проверка, что книга остаётся в словаре после удаления из избранного
     def test_delete_book_from_favorites_does_not_remove_from_books_dict(self):
