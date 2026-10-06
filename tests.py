@@ -131,6 +131,13 @@ class TestBooksCollector:
         collector.delete_book_from_favorites(name)
         assert collector.get_list_of_favorites_books() == []
 
+    # 10.3. Удаление из избранного: безопасное удаление несуществующей книги
+    def test_delete_book_from_favorites_does_nothing_if_not_present(self):
+        collector = BooksCollector()
+        # Книга не добавлялась в избранное вообще
+        collector.delete_book_from_favorites("НетВИзбранном")
+        assert collector.get_list_of_favorites_books() == []
+
     # 11. Проверка, что книга остаётся в словаре после удаления из избранного
     def test_delete_book_from_favorites_does_not_remove_from_books_dict(self):
         collector = BooksCollector()
