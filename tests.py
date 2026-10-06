@@ -111,22 +111,15 @@ class TestBooksCollector:
 
 # --- для метода add_book_in_favorites ---
 
-    # 10. Избранное: добавление, запрет дублей, удаление
-    def test_add_book_in_favorites_handles_duplicates_and_safe_delete(self):
+    # 10.1. Добавление в избранное: запрет дублей
+    def test_add_book_in_favorites_prevents_duplicates(self):
         collector = BooksCollector()
         name = "Любимая"
         collector.add_new_book(name)
         collector.add_book_in_favorites(name)
-        collector.add_book_in_favorites(name)  # повтор
+        collector.add_book_in_favorites(name)  # повторный вызов
         assert collector.get_list_of_favorites_books() == [name]
-
-        collector.delete_book_from_favorites(name)
-        assert collector.get_list_of_favorites_books() == []
-
-        # Безопасное удаление несуществующей
-        collector.delete_book_from_favorites("НетВИзбранном")
-        assert collector.get_list_of_favorites_books() == []
-
+        
 # --- для метода delete_book_from_favorites ---
 
     # 11. Проверка, что книга остаётся в словаре после удаления из избранного
