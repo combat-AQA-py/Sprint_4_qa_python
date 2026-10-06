@@ -49,8 +49,9 @@ get_list_of_favorites_books	    13, 10, 11
 ### Тест для `get_books_for_children`
 - `test_get_books_for_children_excludes_age_rated` — книги с жанрами из `genre_age_rating` («Ужасы», «Детективы») исключаются из списка для детей.
 
-### Тест для `add_book_in_favorites`
-- `test_add_book_in_favorites_handles_duplicates_and_safe_delete` — добавление в избранное без дублей, корректное и безопасное удаление (в том числе несуществующей книги).
+#### Этот тест изменён по замечанию Ревью, описание ниже!!!
+    ### Тест для `add_book_in_favorites`
+    - `test_add_book_in_favorites_handles_duplicates_and_safe_delete` — добавление в избранное без дублей, корректное и безопасное удаление (в том числе несуществующей книги).
 
 ### Тест для `delete_book_from_favorites`
 - `test_delete_book_from_favorites_does_not_remove_from_books_dict` — при удалении из избранного книга остаётся в словаре `books_genre`.
@@ -67,4 +68,10 @@ get_list_of_favorites_books	    13, 10, 11
 Запуск тестов:
 pytest -v tests.py 
 Ожидаемый результат: все тесты PASSED.
-Фактический результат: 18 passed in 0.94s.
+#### Фактический результат: 20 passed in 0.33s.
+
+#### Замечания Ревью на тест 10 -- Нужно исправить: сценарии должны быть атомарны --
+Из теста 10 делаем три атомарных теста:
+- 10.1. - для `add_book_in_favorites` - "test: add atomic test for preventing duplicates in favorites"
+- 10.2. - для `delete_book_from_favorites` - "test: add atomic test for removing existing book from favorites"
+- 10.3. - для `delete_book_from_favorites` - "test: add atomic test for safe removal of non-existent book from favorites"
