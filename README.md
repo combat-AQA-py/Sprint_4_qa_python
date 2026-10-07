@@ -68,10 +68,17 @@ get_list_of_favorites_books	    13, 10, 11
 Запуск тестов:
 pytest -v tests.py 
 Ожидаемый результат: все тесты PASSED.
-#### Фактический результат: 20 passed in 0.33s.
+#### Фактический результат: 22 passed in 0.36s.
 
 #### Замечания Ревью на тест 10 -- Нужно исправить: сценарии должны быть атомарны --
 Из теста 10 делаем три атомарных теста:
 - 10.1. - для `add_book_in_favorites` - "test: add atomic test for preventing duplicates in favorites"
 - 10.2. - для `delete_book_from_favorites` - "test: add atomic test for removing existing book from favorites"
 - 10.3. - для `delete_book_from_favorites` - "test: add atomic test for safe removal of non-existent book from favorites"
+#### Замечания Ревью на тест 6 -- Нужно исправить: в тестах не должно быть условий --
+#### Замечания Ревью на тест 6 -- Нужно исправить: ассерт должен быть однозначным --
+- 6a
+- 6b
+#### Замечания Ревью на тест 10.1. -- Нужно исправить: сначала нужно проверить успешное добавление в избранное, а затем уже проектировать негативные сценарии, в том числе дубликат --
+- 10.1.1.
+- 10.1.2.
