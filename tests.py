@@ -121,6 +121,17 @@ class TestBooksCollector:
         collector.add_book_in_favorites(name)
         assert collector.get_list_of_favorites_books() == [name]
 
+    # 10.1.2. Добавление в избранное: запрет дублей
+    def test_add_book_in_favorites_prevents_duplicates(self):
+        collector = BooksCollector()
+        name = "Любимая"
+        collector.add_new_book(name)
+        collector.add_book_in_favorites(name)  # первое добавление
+        # Действие: пытаемся добавить повторно
+        collector.add_book_in_favorites(name)
+        # Проверка: в списке всё ещё только одна книга
+        assert collector.get_list_of_favorites_books() == [name]
+
 # --- для метода delete_book_from_favorites ---
 
     # 10.2. Удаление из избранного: успешное удаление
