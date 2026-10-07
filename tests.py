@@ -63,7 +63,7 @@ class TestBooksCollector:
     def test_set_book_genre_book_not_added_genre_not_set(self):
         collector = BooksCollector()
         collector.set_book_genre("Несуществующая", "Фантастика")
-        assert collector.get_book_genre("Несуществующая") == ""
+        assert collector.get_book_genre("Несуществующая") is None
 
 # --- для метода get_book_genre ---
 
