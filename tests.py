@@ -65,6 +65,15 @@ class TestBooksCollector:
         collector.set_book_genre("Несуществующая", "Фантастика")
         assert collector.get_book_genre("Несуществующая") is None
 
+    # 6b. Проверяем, что жанры НЕ из списка игнорируются
+    @pytest.mark.parametrize("invalid_genre", ["Триллер", "Мистика"])
+    def test_set_book_genre_ignores_unlisted_genre(self, invalid_genre):
+        collector = BooksCollector()
+        collector.add_new_book("КнигаВ")
+        collector.set_book_genre("КнигаВ", invalid_genre)
+        # Ожидаем, что жанра нет
+        assert collector.get_book_genre("КнигаВ") == ""
+
 # --- для метода get_book_genre ---
 
     # 7. У новой книги жанр — пустая строка
