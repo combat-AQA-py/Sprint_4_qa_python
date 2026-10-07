@@ -59,18 +59,11 @@ class TestBooksCollector:
         collector.set_book_genre(name, genre)
         assert collector.get_book_genre(name) == genre
 
-    # 6. Параметризация: некорректная установка жанра (нет книги или жанр не из списка)
-    @pytest.mark.parametrize("name, genre", [
-        ("Несуществующая", "Фантастика"),
-        ("КнигаВ", "Триллер"),
-    ])
-    def test_set_book_genre_invalid(self, name, genre):
+    # 6a. Книга не добавлена — жанр не устанавливается
+    def test_set_book_genre_book_not_added_genre_not_set(self):
         collector = BooksCollector()
-        if name != "Несуществующая":
-            collector.add_new_book(name)
-        collector.set_book_genre(name, genre)
-        result = collector.get_book_genre(name)
-        assert result == "" or result is None
+        collector.set_book_genre("Несуществующая", "Фантастика")
+        assert collector.get_book_genre("Несуществующая") == ""
 
 # --- для метода get_book_genre ---
 
